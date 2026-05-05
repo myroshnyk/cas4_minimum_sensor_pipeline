@@ -14,7 +14,14 @@ authors:
   - family-names: Leshchenko
     given-names: Oleksandr
 license: MIT
+version: "1.0.0"
+date-released: "2026-05-05"
+doi: "10.5281/zenodo.20041039"
 repository-code: "https://github.com/myroshnyk/cas4_minimum_sensor_pipeline"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.20041039"
+    description: "Concept DOI (always resolves to the latest archived release)"
 keywords:
   - clinical deterioration prediction
   - early warning score

@@ -1,6 +1,6 @@
 # Reproducibility Pipeline — How Few Sensors Are Enough?
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20041039.svg)](https://doi.org/10.5281/zenodo.20041039)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 > **Note:** the DOI badge above will resolve after the first GitHub Release is archived by Zenodo (see *Citing this software* below).
@@ -197,7 +197,7 @@ If you use this code, please cite both the paper and the archived software relea
 Myroshnyk Y., Leshchenko O. *How Few Sensors Are Enough? Systematic Evaluation of Minimum Vital Sign Requirements for Machine Learning-Based Deterioration Prediction with Multi-Center Validation Across 139 Hospitals.* IEEE Access (under review), 2026.
 
 **Software (Zenodo):**
-Each tagged GitHub release is archived on Zenodo and assigned a DOI. Use the DOI corresponding to the version you used (visible on the Zenodo record page). The "concept DOI" `10.5281/zenodo.XXXXXXX` always resolves to the latest version.
+Each tagged GitHub release is archived on Zenodo and assigned a DOI. Use the DOI corresponding to the version you used (visible on the Zenodo record page). The "concept DOI" `10.5281/zenodo.20041039` always resolves to the latest version.
 
 A machine-readable citation entry is provided in [`CITATION.cff`](CITATION.cff) — GitHub displays a "Cite this repository" button that uses it.
 
