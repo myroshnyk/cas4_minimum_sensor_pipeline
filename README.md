@@ -7,7 +7,7 @@
 
 This repository contains the analysis pipeline for:
 
-> Myroshnyk Y., Leshchenko O. *How Few Sensors Are Enough? Systematic Evaluation of Minimum Vital Sign Requirements for Machine Learning-Based Deterioration Prediction with Multi-Center Validation Across 139 Hospitals.* IEEE Access (under review), 2026.
+> Myroshnyk Y., Leshchenko O. *How Few Sensors Are Enough? Systematic Evaluation of Minimum Vital Sign Requirements for Machine Learning-Based Deterioration Prediction with Multi-Center Validation Across 138 Hospitals.* IEEE Access (under review), 2026.
 
 ## Contents
 
@@ -86,19 +86,38 @@ The exact versions used in the paper are documented in Section III.H of the manu
 
 ## Running the Pipeline
 
-Set credentials (avoids interactive prompts):
+### Configure credentials
+
+The notebook loads PhysioNet credentials from a local `.env` file (gitignored)
+via [python-dotenv](https://pypi.org/project/python-dotenv/). Copy the template
+and fill in your values:
 
 ```bash
-export PHYSIONET_USER="your_physionet_username"
-export PHYSIONET_PASSWORD="your_password"
-export CAS_BASE_DIR="$HOME/mimic4_study"   # optional, defaults to ~/mimic4_study
+cp .env.example .env
+# then edit .env in your editor
 ```
 
-Launch:
+Minimum contents of `.env`:
+
+```
+PHYSIONET_USER=your_physionet_username
+# PHYSIONET_PASSWORD=your_password   # optional — leave commented to be prompted via getpass
+# CAS_BASE_DIR=~/mimic4_study        # optional — defaults to ~/mimic4_study
+```
+
+If `PHYSIONET_PASSWORD` is left unset, the notebook prompts for it securely
+at the download step (the password is never written to disk or the notebook).
+
+Alternatively, you can export the variables in your shell instead of using
+a `.env` file — exported environment variables take precedence over `.env`.
+
+### Launch
 
 ```bash
 jupyter notebook cas4_minimum_sensor_pipeline.ipynb
 ```
+
+Or open the notebook directly in VS Code and select the `.venv` kernel.
 
 In the notebook: **Kernel → Restart & Run All**.
 
@@ -139,19 +158,41 @@ Total cold start: ~1.5–2.5 hours. With cached data: ~25–50 minutes.
 
 ## Key Results to Verify
 
-After a full run, `results/all_results.json` should contain values close to:
+After a full run, `results/all_results.json` should contain values close to those reported in the manuscript. See [CHANGELOG.md](CHANGELOG.md) for the per-release version history; the table below lists the **current (v1.1.0)** values.
 
-| Metric | Expected | Source in paper |
+| Metric | Value | Source in paper |
 |---|---|---|
 | MIMIC-IV cohort n | 51,981 | Table III |
 | Mortality rate | 9.9% | Table III |
-| L5-CAS4 AUROC | 0.759 | Table II |
-| L5b-CAS4+A(t) calibration slope | 0.999 | Table II |
-| eICU AUROC | 0.734 | Table VII |
-| eICU calibration slope | 1.045 | Table VII |
-| Knee point delta_AUROC (CAS-4 vs 3-vitals) | -0.053, p<0.001 | Section IV.B |
+| L1-Full AUROC | 0.854 | Table II |
+| L3-NEWS2 AUROC | 0.841 (was 0.774 in v1.0.0; see [CHANGELOG.md](CHANGELOG.md)) | Table II |
+| L4-5vitals AUROC | 0.774 | Table II |
+| L5-CAS4 AUROC | 0.756 | Table II |
+| L5b-CAS4+A(t) AUROC | 0.758 | Table II |
+| L5b-CAS4+A(t) calibration slope | 0.939 | Table II |
+| L6-3vitals AUROC | 0.736 | Table II |
+| L6-3vitals calibration slope | 1.006 | Table II |
+| L7-2vitals AUROC | 0.684 | Table II |
+| L7-2vitals calibration slope | 2.654 (under review, see Step 12c) | Table II |
+| eICU AUROC | 0.776 | Table VII |
+| eICU calibration slope | 0.965 | Table VII |
+| eICU hospitals | 138 | Table VII |
+| Knee point ΔAUROC (L5 vs L6) | -0.020, p<0.001 | Section IV.B |
+| Knee point ΔAUROC (L6 vs L7, central claim) | -0.052 (formal p-value via Step 17) | Section IV.B |
+| CAS-4 vs NEWS2-set ΔAUROC | -0.085, p<0.001 (was -0.017 in v1.0.0) | Section IV.B |
 
-> **Note (v4):** Train-only A(t) calibration may shift these values slightly from the v3 results reported in the manuscript. Re-run and update the manuscript accordingly.
+> **Note (v1.1.0):** GCS in MIMIC-IV is now reconstructed from its three component itemids (220739, 223900, 223901). The v1.0.0 release used the MIMIC-III legacy `itemid` 198, which does not exist in MIMIC-IV `chartevents`; this caused L3-NEWS2 to silently degrade to L4-5vitals. Numbers in the table above reflect the corrected pipeline. See [CHANGELOG.md](CHANGELOG.md) for full details.
+
+> **Note (v4 → v5 internal):** Train-only A(t) calibration (introduced in v4) is preserved unchanged. The pipeline executes a formal bootstrap permutation test (Step 17) for the central L6 vs L7 knee-point claim. If you re-run and observe a numerical drift exceeding 0.01 AUROC for any reported metric, please open an issue.
+
+### New diagnostic outputs in v4
+
+The v4 pipeline produces additional CSVs and figures intended for reviewer scrutiny:
+
+- `results/calibration_decile_diagnostic.csv` — decile-level observed/expected for top-3 models (addresses HL-test sensitivity at large n)
+- `figures/fig_l7_calibration_diagnostic.png` — predicted-probability histograms for L6/L7/L8 + bootstrapped slope CI for L7 (addresses slope=2.654 sanity check)
+- `results/dca_post_platt.csv` — DCA after Platt scaling on validation set (empirical test of recalibration claim)
+- `results/eicu_hospital_selection_bias.csv` — characteristics of included vs. excluded eICU hospitals (selection-bias quantification)
 
 ## Methodology Notes
 
@@ -194,7 +235,7 @@ Verify your CITI training is current and that you signed the data use agreements
 If you use this code, please cite both the paper and the archived software release:
 
 **Paper:**
-Myroshnyk Y., Leshchenko O. *How Few Sensors Are Enough? Systematic Evaluation of Minimum Vital Sign Requirements for Machine Learning-Based Deterioration Prediction with Multi-Center Validation Across 139 Hospitals.* IEEE Access (under review), 2026.
+Myroshnyk Y., Leshchenko O. *How Few Sensors Are Enough? Systematic Evaluation of Minimum Vital Sign Requirements for Machine Learning-Based Deterioration Prediction with Multi-Center Validation Across 138 Hospitals.* IEEE Access (under review), 2026.
 
 **Software (Zenodo):**
 Each tagged GitHub release is archived on Zenodo and assigned a DOI. Use the DOI corresponding to the version you used (visible on the Zenodo record page). The "concept DOI" `10.5281/zenodo.20041039` always resolves to the latest version.
