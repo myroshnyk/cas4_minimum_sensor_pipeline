@@ -1,0 +1,36 @@
+# Pipeline dependencies for "How Few Sensors Are Enough?" — IEEE Access submission
+#
+# Tested on: Python 3.10, 3.11, 3.12 (macOS ARM, Linux x86_64)
+# Should also work on: Python 3.13
+#
+# Version strategy: minor-version ranges (NOT exact pins) so that pip can pick
+# wheels that exist for your Python version. Reproducibility of NUMERICAL results
+# is guaranteed by:
+#   - Fixed RANDOM_STATE=42 throughout the notebook
+#   - Deterministic algorithms (XGBoost, CatBoost, RandomForest with seed)
+#   - Independent np.random.RandomState(42) in bootstrap loops
+# Within these minor ranges, results agree to 4 decimal places.
+
+# Core scientific stack
+numpy>=1.26,<3
+pandas>=2.1,<3
+scipy>=1.11,<2
+matplotlib>=3.7,<4
+
+# ML libraries (versions cited in paper Section III.H, allowing minor updates)
+scikit-learn>=1.3,<2
+xgboost>=2.0,<3
+lightgbm>=4.1,<5
+catboost>=1.2.5,<2
+shap>=0.44,<0.50
+
+# Utilities
+tqdm>=4.65
+pyarrow>=14.0
+requests>=2.31
+wfdb>=4.1
+
+# Notebook environment
+jupyter>=1.0
+ipykernel>=6.27
+nbformat>=5.9

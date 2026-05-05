@@ -1,0 +1,38 @@
+cff-version: 1.2.0
+message: "If you use this software or its results, please cite the associated paper."
+title: "How Few Sensors Are Enough? Reproducibility Pipeline"
+abstract: >-
+  Reproducibility pipeline for the systematic evaluation of minimum vital sign
+  requirements for machine-learning-based clinical deterioration prediction,
+  with multi-center validation across 139 hospitals using MIMIC-IV and eICU-CRD.
+type: software
+authors:
+  - family-names: Myroshnyk
+    given-names: Yurii
+    email: myroshnyk@gmail.com
+    orcid: "https://orcid.org/0009-0004-5117-5289"
+  - family-names: Leshchenko
+    given-names: Oleksandr
+license: MIT
+repository-code: "https://github.com/myroshnyk/cas4_minimum_sensor_pipeline"
+keywords:
+  - clinical deterioration prediction
+  - early warning score
+  - MIMIC-IV
+  - eICU-CRD
+  - XGBoost
+  - reproducibility
+preferred-citation:
+  type: article
+  title: >-
+    How Few Sensors Are Enough? Systematic Evaluation of Minimum Vital Sign
+    Requirements for Machine Learning-Based Deterioration Prediction with
+    Multi-Center Validation Across 139 Hospitals
+  authors:
+    - family-names: Myroshnyk
+      given-names: Yurii
+    - family-names: Leshchenko
+      given-names: Oleksandr
+  journal: "IEEE Access"
+  year: 2026
+  notes: "Under review"
