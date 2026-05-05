@@ -1,5 +1,10 @@
 # Reproducibility Pipeline — How Few Sensors Are Enough?
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+> **Note:** the DOI badge above will resolve after the first GitHub Release is archived by Zenodo (see *Citing this software* below).
+
 This repository contains the analysis pipeline for:
 
 > Myroshnyk Y., Leshchenko O. *How Few Sensors Are Enough? Systematic Evaluation of Minimum Vital Sign Requirements for Machine Learning-Based Deterioration Prediction with Multi-Center Validation Across 139 Hospitals.* IEEE Access (under review), 2026.
@@ -184,6 +189,18 @@ Your Jupyter kernel is using a different Python than where you installed package
 **PhysioNet 401/403 errors**
 Verify your CITI training is current and that you signed the data use agreements at https://physionet.org/content/mimiciv/3.1/ AND https://physionet.org/content/eicu-crd/2.0/.
 
+## Citing this software
+
+If you use this code, please cite both the paper and the archived software release:
+
+**Paper:**
+Myroshnyk Y., Leshchenko O. *How Few Sensors Are Enough? Systematic Evaluation of Minimum Vital Sign Requirements for Machine Learning-Based Deterioration Prediction with Multi-Center Validation Across 139 Hospitals.* IEEE Access (under review), 2026.
+
+**Software (Zenodo):**
+Each tagged GitHub release is archived on Zenodo and assigned a DOI. Use the DOI corresponding to the version you used (visible on the Zenodo record page). The "concept DOI" `10.5281/zenodo.XXXXXXX` always resolves to the latest version.
+
+A machine-readable citation entry is provided in [`CITATION.cff`](CITATION.cff) — GitHub displays a "Cite this repository" button that uses it.
+
 ## Contact
 
 Yurii Myroshnyk — myroshnyk@gmail.com
@@ -191,5 +208,5 @@ ORCID: 0009-0004-5117-5289
 
 ## License
 
-Code: MIT
+Code: MIT (see [LICENSE](LICENSE))
 Data: subject to PhysioNet data use agreements (must be obtained separately)

@@ -1,0 +1,36 @@
+{
+  "title": "How Few Sensors Are Enough? Reproducibility Pipeline",
+  "description": "Reproducibility pipeline for the systematic evaluation of minimum vital sign requirements for machine-learning-based clinical deterioration prediction, with multi-center validation across 139 hospitals using MIMIC-IV and eICU-CRD. Companion code for the IEEE Access submission.",
+  "upload_type": "software",
+  "license": "MIT",
+  "access_right": "open",
+  "language": "eng",
+  "creators": [
+    {
+      "name": "Myroshnyk, Yurii",
+      "orcid": "0009-0004-5117-5289"
+    },
+    {
+      "name": "Leshchenko, Oleksandr"
+    }
+  ],
+  "keywords": [
+    "clinical deterioration prediction",
+    "early warning score",
+    "MIMIC-IV",
+    "eICU-CRD",
+    "XGBoost",
+    "machine learning",
+    "healthcare",
+    "reproducibility"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/myroshnyk/cas4_minimum_sensor_pipeline",
+      "relation": "isSupplementTo",
+      "resource_type": "software",
+      "scheme": "url"
+    }
+  ],
+  "communities": []
+}
