@@ -10,6 +10,41 @@ version (this file, `CITATION.cff`) follows semver.
 
 ---
 
+## [1.1.1] — 2026-05-05 — Calibration metrics expansion
+
+Internal pipeline version: `Scenario_C_v5_gcs_fix` (unchanged).
+
+No existing numerical results changed in this release. Adds three calibration
+metrics that close residual gaps in the panel.
+
+### Added
+
+- **eICU CITL.** `cal_itl(y_eicu, y_prob_eicu)` is now computed alongside
+  `slope_e` and `brier_e` in Cell 60 and reported in
+  `all_results.json[eicu_validation.citl]`. Result: +0.265, nearly identical
+  to the MIMIC test-set CITL of +0.255 for the same model — indicating that
+  the systematic over-prediction is intrinsic to the XGBoost +
+  `scale_pos_weight` configuration, not cohort-specific. Implication: the
+  Platt-scaling recalibration that fixes MIMIC calibration generalizes to
+  eICU.
+- **Post-Platt Brier and BSS** for CAS-4 hybrid A + XGBoost on the test set
+  (Cell 55). Results saved to `results/post_platt_calibration.csv` and
+  `all_results.json[post_platt_calibration]`. Key numbers:
+  - Brier: 0.160 → 0.081 (−49%)
+  - Scaled Brier: −0.78 → +0.09 (crosses the no-skill baseline)
+  - CITL: +0.255 → −0.001 (essentially perfect)
+  - Net benefit at p_t=0.10: 0.0068 → 0.0382 (×5.6)
+- **L7 calibration-slope bootstrap CI** persisted to
+  `results/l7_slope_bootstrap.json` (point estimate 2.65, 95% CI
+  [2.37, 2.92], σ = 0.14, *n* = 1000, seed 42). Confirms the L7 slope is
+  numerically stable rather than an estimation artifact.
+
+### Changed
+
+- None. All v1.1.0 numbers reproduce exactly.
+
+---
+
 ## [1.1.0] — 2026-05-05 — GCS reconstruction fix
 
 Internal pipeline version: `Scenario_C_v5_gcs_fix` (was `Scenario_C_v4`).
@@ -93,5 +128,6 @@ Internal pipeline version: `Scenario_C_v4`.
 - **Known issue (fixed in 1.1.0):** GCS itemid mismatch caused L3-NEWS2 to
   silently degrade to L4-5vitals.
 
+[1.1.1]: https://github.com/myroshnyk/cas4_minimum_sensor_pipeline/releases/tag/v1.1.1
 [1.1.0]: https://github.com/myroshnyk/cas4_minimum_sensor_pipeline/releases/tag/v1.1.0
 [1.0.0]: https://github.com/myroshnyk/cas4_minimum_sensor_pipeline/releases/tag/v1.0.0
