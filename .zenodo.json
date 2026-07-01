@@ -1,6 +1,6 @@
 {
   "title": "How Few Sensors Are Enough? Reproducibility Pipeline",
-  "description": "Reproducibility pipeline for the systematic evaluation of minimum vital sign requirements for machine-learning-based clinical deterioration prediction, with multi-center validation across 139 hospitals using MIMIC-IV and eICU-CRD. Companion code for the IEEE Access submission.",
+  "description": "Reproducibility pipeline for the systematic evaluation of minimum vital sign requirements for machine-learning-based clinical deterioration prediction, with multi-center validation across 139 hospitals using MIMIC-IV and eICU-CRD. Companion code for the IEEE Access submission. v1.2.0 adds the reviewer-requested robustness analyses (notebook Steps 18-28: uniform recalibration, cutoff-sensitivity, per-configuration tuning, LightGBM tuning, temporal split, code-status sensitivity, prevalence-reweighting, full-eICU validation, LSTM sequence-model ablation, Spiegelhalter Z) and a requirements-lock.txt for bit-level reproduction; no previously reported numerical result changed.",
   "upload_type": "software",
   "license": "MIT",
   "access_right": "open",

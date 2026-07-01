@@ -10,6 +10,44 @@ version (this file, `CITATION.cff`) follows semver.
 
 ---
 
+## [1.2.0] — 2026-07-01 — Reviewer-requested robustness analyses (IEEE Access Major Revision)
+
+Internal pipeline version: `Scenario_C_v5_gcs_fix` (unchanged).
+
+**No existing numerical result changed.** A full from-scratch re-run (scikit-learn
+pinned 1.8.0) reproduces every previously reported number exactly. This release
+only *adds* the analyses requested by the three IEEE Access reviewers, as new
+notebook Steps 18–28, and pins exact package versions for bit-level reproduction.
+The authors' original cells (Steps 0–17) are untouched.
+
+### Added
+
+- **Steps 18–28 — reviewer-requested analyses** (all use the same seed-42 split
+  and models; results in `results/rev_*.csv`, figures in `figures/fig_rev_*.png`):
+  - Step 18 — uniform Platt recalibration of all nine configurations (fit on
+    validation, applied to test).
+  - Step 19 — cutoff-sensitivity of the "minimum viable" criterion.
+  - Step 20 — per-configuration hyperparameter sweep (max_depth × learning_rate).
+  - Step 21 — own-grid LightGBM tuning comparison.
+  - Step 22 — temporal split (train ≤2016, test 2017+).
+  - Step 23 — code-status (DNR/DNI/CMO) sensitivity + STROBE cohort-flow counts.
+  - Step 24 — prevalence-reweighted eICU calibration + per-hospital heterogeneity.
+  - Step 25 — full (broad) eICU validation and cross-database disentanglement.
+  - Step 26 — LSTM sequence-model ablation on hourly trajectories.
+  - Step 27 — Spiegelhalter Z (replaces the over-powered Hosmer–Lemeshow test).
+  - Step 28 — consolidated revision summary written to
+    `all_results.json[revision_analyses]`.
+- **`requirements-lock.txt`** — 141 exact-pinned packages (incl. scikit-learn
+  1.8.0, XGBoost 2.1.4, LightGBM 4.6.0, CatBoost 1.2.10, SciPy 1.17.1, torch
+  2.12.0) for bit-level reproduction. The range-pinned `requirements.txt` is kept
+  as-is; use the lock file to reproduce the reported numbers exactly.
+
+### Changed
+
+- None. All v1.1.1 numbers reproduce exactly under the pinned environment.
+
+---
+
 ## [1.1.1] — 2026-05-05 — Calibration metrics expansion
 
 Internal pipeline version: `Scenario_C_v5_gcs_fix` (unchanged).
@@ -128,6 +166,7 @@ Internal pipeline version: `Scenario_C_v4`.
 - **Known issue (fixed in 1.1.0):** GCS itemid mismatch caused L3-NEWS2 to
   silently degrade to L4-5vitals.
 
+[1.2.0]: https://github.com/myroshnyk/cas4_minimum_sensor_pipeline/releases/tag/v1.2.0
 [1.1.1]: https://github.com/myroshnyk/cas4_minimum_sensor_pipeline/releases/tag/v1.1.1
 [1.1.0]: https://github.com/myroshnyk/cas4_minimum_sensor_pipeline/releases/tag/v1.1.0
 [1.0.0]: https://github.com/myroshnyk/cas4_minimum_sensor_pipeline/releases/tag/v1.0.0
