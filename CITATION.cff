@@ -16,12 +16,15 @@ authors:
 license: MIT
 version: "1.2.0"
 date-released: "2026-07-01"
-doi: "10.5281/zenodo.20041039"
+doi: "10.5281/zenodo.20041038"
 repository-code: "https://github.com/myroshnyk/cas4_minimum_sensor_pipeline"
 identifiers:
   - type: doi
-    value: "10.5281/zenodo.20041039"
+    value: "10.5281/zenodo.20041038"
     description: "Concept DOI (always resolves to the latest archived release)"
+  - type: doi
+    value: "10.5281/zenodo.21105657"
+    description: "Version DOI for v1.2.0 (the release used in the IEEE Access revision)"
 keywords:
   - clinical deterioration prediction
   - early warning score
