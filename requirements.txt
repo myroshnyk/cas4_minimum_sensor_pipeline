@@ -23,6 +23,7 @@ xgboost>=2.0,<3
 lightgbm>=4.1,<5
 catboost>=1.2.5,<2
 shap>=0.44,<0.50
+torch>=2.0,<3          # Step 26 LSTM sequence-model ablation (revision analyses, v1.2.0); CPU-only is fine
 
 # Utilities
 tqdm>=4.65
