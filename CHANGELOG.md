@@ -10,6 +10,34 @@ version (this file, `CITATION.cff`) follows semver.
 
 ---
 
+## [1.2.1] — 2026-07-01 — Packaging & docs fixes for the revision release
+
+Internal pipeline version: `Scenario_C_v5_gcs_fix` (unchanged). No code or
+numerical result changed relative to v1.2.0 — this patch only fixes packaging
+and documentation so the archived snapshot is self-consistent and runnable via
+either dependency file.
+
+### Fixed
+
+- **`torch` added to `requirements.txt`** (`torch>=2.0,<3`). Step 26 (LSTM
+  sequence-model ablation, added in v1.2.0) imports PyTorch, so a full
+  "Restart & Run All" failed on the range-pinned install. `requirements-lock.txt`
+  already pinned torch; this makes the forward-compatible install complete too.
+  CPU-only is sufficient.
+- **Zenodo DOI corrected in metadata.** `CITATION.cff` and `README.md` previously
+  cited `10.5281/zenodo.20041039` (the v1.0.0 *version* DOI) as the "concept DOI".
+  The true concept DOI is **`10.5281/zenodo.20041038`** (always resolves to the
+  latest release). Fixed in both files.
+
+### Changed — documentation
+
+- **README.md** now documents Steps 18–28 in the Pipeline Structure table, adds a
+  v1.2.0 note, updates Key Results (L7 slope reframed as a recalibration-correctable
+  over-capacity artifact; knee −0.053), documents `requirements-lock.txt` for
+  bit-level reproduction, and lists PyTorch as a prerequisite for Step 26.
+
+---
+
 ## [1.2.0] — 2026-07-01 — Reviewer-requested robustness analyses (IEEE Access Major Revision)
 
 Internal pipeline version: `Scenario_C_v5_gcs_fix` (unchanged).
@@ -166,6 +194,7 @@ Internal pipeline version: `Scenario_C_v4`.
 - **Known issue (fixed in 1.1.0):** GCS itemid mismatch caused L3-NEWS2 to
   silently degrade to L4-5vitals.
 
+[1.2.1]: https://github.com/myroshnyk/cas4_minimum_sensor_pipeline/releases/tag/v1.2.1
 [1.2.0]: https://github.com/myroshnyk/cas4_minimum_sensor_pipeline/releases/tag/v1.2.0
 [1.1.1]: https://github.com/myroshnyk/cas4_minimum_sensor_pipeline/releases/tag/v1.1.1
 [1.1.0]: https://github.com/myroshnyk/cas4_minimum_sensor_pipeline/releases/tag/v1.1.0
